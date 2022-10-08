@@ -20,8 +20,8 @@ const Home = () => {
   return (
     <Container sx={{marginTop: "60px"}}>
       <Grid container spacing={2}>
-        {movies?.map((movie, i) => (
-          <Grid item xs={4} key={i}>
+        {movies?.map((movie) => (
+          <Grid item xs={4} key={movie.id}>
               <CardMovie movie={movie}/>
           </Grid>
         ))}
