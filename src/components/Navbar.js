@@ -1,13 +1,25 @@
-import * as React from 'react';
-import { styled, alpha } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import InputBase from '@mui/material/InputBase';
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
+import * as React from 'react'
+import { styled, alpha } from '@mui/material/styles'
+import AppBar from '@mui/material/AppBar'
+import Box from '@mui/material/Box'
+import Toolbar from '@mui/material/Toolbar'
+import IconButton from '@mui/material/IconButton'
+import Typography from '@mui/material/Typography'
+import InputBase from '@mui/material/InputBase'
+import MenuIcon from '@mui/icons-material/Menu'
+import SearchIcon from '@mui/icons-material/Search'
+import BookmarkIcon from '@mui/icons-material/Bookmark'
+import {
+  Divider,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from '@mui/material'
+import Favories from '../pages/Favories'
+import { useNavigate } from 'react-router-dom'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -22,7 +34,7 @@ const Search = styled('div')(({ theme }) => ({
     marginLeft: theme.spacing(1),
     width: 'auto',
   },
-}));
+}))
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
@@ -32,7 +44,7 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-}));
+}))
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
@@ -49,9 +61,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
       },
     },
   },
-}));
+}))
 
 export default function Navbar() {
+  const [isOpen, setIsOpen] = React.useState(false)
+  const navigate = useNavigate()
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -62,7 +76,28 @@ export default function Navbar() {
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
+            onClick={() => setIsOpen(!isOpen)}
           >
+            <Drawer onClose={isOpen} open={isOpen} anchor={'left'}>
+              <Box
+                sx={{
+                  width: 250,
+                }}
+                role="presentation"
+              >
+                <List>
+                  <ListItem disablePadding>
+                    <ListItemButton onClick={() => navigate("/favorie")}>
+                      <ListItemIcon>
+                        <BookmarkIcon />
+                      </ListItemIcon>
+                      <ListItemText primary={'Favories'} />
+                    </ListItemButton>
+                  </ListItem>
+                </List>
+                <Divider />
+              </Box>
+            </Drawer>
             <MenuIcon />
           </IconButton>
           <Typography
@@ -85,5 +120,5 @@ export default function Navbar() {
         </Toolbar>
       </AppBar>
     </Box>
-  );
+  )
 }

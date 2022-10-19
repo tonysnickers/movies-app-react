@@ -5,14 +5,22 @@ import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import { Button, CardActionArea, CardActions } from '@mui/material'
 import { Link } from 'react-router-dom'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
-const CardMovie = ({ movie}) => {
+const CardMovie = ({ movie, handleFavories, favories }) => {
   const image = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
 
+  const renderIcon = () => {
+    if (favories.includes(movie)) {
+      return <FavoriteIcon/>
+    } else return <FavoriteBorderIcon/>
+  }
+
   return (
-    <Link to={`movie/${movie.id}`}>
-      <Card>
-        <CardActionArea>
+    <Card>
+      <CardActionArea>
+        <Link to={`movie/${movie.id}`}>
           <CardMedia
             component="img"
             height="380"
@@ -27,14 +35,14 @@ const CardMovie = ({ movie}) => {
               {movie.overview}
             </Typography>
           </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <Button size="small" color="primary">
-            Share
-          </Button>
-        </CardActions>
-      </Card>
-    </Link>
+        </Link>
+      </CardActionArea>
+      <CardActions>
+        <Button size="small" color="primary" onClick={() => handleFavories(movie)} >
+          {renderIcon()}
+        </Button>
+      </CardActions>
+    </Card>
   )
 }
 
