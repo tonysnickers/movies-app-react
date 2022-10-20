@@ -12,7 +12,7 @@ const CardMovie = ({ movie, handleFavories, favories }) => {
   const image = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
 
   const renderIcon = () => {
-    if (favories.includes(movie)) {
+    if (favories?.includes(movie)) {
       return <FavoriteIcon/>
     } else return <FavoriteBorderIcon/>
   }
@@ -20,7 +20,7 @@ const CardMovie = ({ movie, handleFavories, favories }) => {
   return (
     <Card>
       <CardActionArea>
-        <Link to={`movie/${movie.id}`}>
+        <Link to={`/movie/${movie.id}`}>
           <CardMedia
             component="img"
             height="380"
