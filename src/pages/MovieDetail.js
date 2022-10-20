@@ -52,7 +52,7 @@ const MovieDetail = () => {
           <Typography variant="body">{movie.overview}</Typography>
         </Box>
       </Stack>
-      <Grid container spacing={2} sx={{marginTop: "60px"}}>
+      <Grid container spacing={2} sx={{ marginTop: '60px' }}>
         {similarMovie?.map((movie) => (
           <Grid item xs={4}>
             <CardMovie movie={movie} />
